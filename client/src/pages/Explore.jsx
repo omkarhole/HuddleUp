@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { motion } from 'framer-motion';
 import PageWrapper from '@/components/ui/PageWrapper';
 import EmptyState from '@/components/ui/EmptyState';
-import { TrendingUp, Clock, Flame, Globe, ChevronRight, Search, Play, User, Link2, Video, Bookmark } from 'lucide-react';
+import { TrendingUp, Clock, Flame, Globe, ChevronRight, Search, Play, User, Link2, Video, Bookmark, Eye, Heart } from 'lucide-react';
 import VideoPlayer from '@/components/VideoPlayer';
 import { API } from '@/api';
 import { toast } from 'sonner';
@@ -20,10 +20,12 @@ const Explore = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('ALL');
+  const [sortBy, setSortBy] = useState('newest'); // newest | views | likes
 
   const fetchVideos = async () => {
     try {
-      const res = await API.get("/videos");
+      const params = sortBy ? { sort: sortBy } : {};
+      const res = await API.get("/videos", { params });
       const allVideos = Array.isArray(res.data) ? res.data : [];
       setVideos(allVideos);
     } catch (error) {
@@ -33,7 +35,7 @@ const Explore = () => {
 
   useEffect(() => {
     fetchVideos();
-  }, []);
+  }, [sortBy]);
 
   useEffect(() => {
     if (location.pathname === "/explore") fetchVideos();
@@ -313,6 +315,35 @@ const Explore = () => {
                   onBlur={(e) => e.target.style.borderColor = 'var(--border-subtle)'}
                 />
               </div>
+            </div>
+
+            {/* Sort options: Newest (default), Most viewed, Most liked */}
+            <div className="flex flex-wrap items-center gap-2 mb-4">
+              <span className="text-sm font-medium mr-1" style={{ color: 'var(--text-sub)' }}>Sort by:</span>
+              {[
+                { key: 'newest', label: 'Newest', icon: Clock },
+                { key: 'views', label: 'Most viewed', icon: Eye },
+                { key: 'likes', label: 'Most liked', icon: Heart },
+              ].map((opt) => {
+                const isActive = sortBy === opt.key;
+                const Icon = opt.icon;
+                return (
+                  <button
+                    key={opt.key}
+                    onClick={() => setSortBy(opt.key)}
+                    className="px-4 py-2 rounded-full font-medium text-sm flex items-center gap-2 transition-all"
+                    style={{
+                      background: isActive ? 'var(--accent)' : 'var(--bg-primary)',
+                      color: isActive ? 'var(--bg-primary)' : 'var(--text-sub)',
+                      border: `2px solid ${isActive ? 'var(--accent)' : 'var(--border-subtle)'}`,
+                      transform: isActive ? 'scale(1.02)' : 'scale(1)',
+                    }}
+                  >
+                    <Icon className="w-4 h-4" />
+                    <span>{opt.label}</span>
+                  </button>
+                );
+              })}
             </div>
 
             {/* Category Filter Pills */}

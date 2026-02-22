@@ -37,9 +37,37 @@ exports.getAllVideos = async (req, res) => {
   try {
     const filter = {};
     if (req.query.postedBy) filter.postedBy = req.query.postedBy;
+    const sortParam = (req.query.sort || "newest").toLowerCase();
+
+    // sort=likes requires aggregation to sort by likes array length
+    if (sortParam === "likes") {
+      const pipeline = [
+        { $match: filter },
+        { $addFields: { likesCount: { $size: { $ifNull: ["$likes", []] } } } },
+        { $sort: { likesCount: -1 } },
+        { $lookup: { from: "users", localField: "postedBy", foreignField: "_id", as: "postedByDoc" } },
+        { $unwind: { path: "$postedByDoc", preserveNullAndEmptyArrays: true } },
+        {
+          $addFields: {
+            postedBy: {
+              _id: "$postedByDoc._id",
+              username: "$postedByDoc.username",
+            },
+          },
+        },
+        { $project: { postedByDoc: 0 } },
+      ];
+      const videos = await Video.aggregate(pipeline);
+      return res.status(200).json(videos);
+    }
+
+    let sortOption = { createdAt: -1 };
+    if (sortParam === "views") sortOption = { views: -1 };
+    // default "newest" or any other value: sort by createdAt desc
+
     const videos = await Video.find(filter)
       .populate("postedBy", "username _id")
-      .sort({ createdAt: -1 });
+      .sort(sortOption);
     res.status(200).json(videos);
   } catch (err) {
     console.error(err);
