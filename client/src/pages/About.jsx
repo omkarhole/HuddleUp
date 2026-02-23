@@ -104,7 +104,7 @@ const About = () => {
       {/* Stats Grid */}
       <section className="px-4 md:px-12 py-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {stats.map((stat, index) => {
               const IconComponent = stat.icon;
               return (
@@ -114,49 +114,64 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  onMouseEnter={() => setHoveredStat(index)}
-                  onMouseLeave={() => setHoveredStat(null)}
-                  className="relative p-6 md:p-8 cursor-pointer group overflow-hidden"
+                  whileHover={{ y: -8 }}
+                  className="group relative p-6 md:p-8 cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover-lift"
                   style={{
                     background: 'var(--bg-surface)',
-                    borderRadius: '12px',
-                    border: hoveredStat === index ? '2px solid' : '1px solid',
-                    borderColor: hoveredStat === index ? stat.color : 'var(--border-subtle)',
-                    transition: 'all 0.3s ease'
+                    border: '1px solid var(--border-subtle)',
                   }}
                 >
-                  {/* Background gradient on hover */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                    style={{ background: stat.color }}
+                  {/* Animated gradient background on hover */}
+                  <motion.div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${stat.color}15, ${stat.color}05)`,
+                      pointerEvents: 'none'
+                    }}
                   />
                   
+                  {/* Glow effect on hover */}
+                  <motion.div
+                    className="absolute -inset-1 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300 rounded-xl"
+                    style={{ background: stat.color }}
+                  />
+
                   <div className="relative z-10">
                     <motion.div
-                      animate={{ rotate: hoveredStat === index ? 12 : 0 }}
+                      animate={{ rotate: 0 }}
+                      whileHover={{ rotate: 12, scale: 1.1 }}
                       transition={{ duration: 0.3 }}
                     >
                       <IconComponent 
-                        className="w-8 h-8 md:w-10 md:h-10 mb-4" 
+                        className="w-8 h-8 md:w-10 md:h-10 mb-4 transition-colors duration-300" 
                         style={{ color: stat.color }} 
                         strokeWidth={1.5}
                       />
                     </motion.div>
                     
                     <motion.div 
-                      className="text-4xl md:text-5xl lg:text-6xl font-black mb-3" 
+                      className="text-4xl md:text-5xl lg:text-6xl font-black mb-3 transition-colors duration-300" 
                       style={{ color: stat.color }}
-                      animate={{ scale: hoveredStat === index ? 1.05 : 1 }}
+                      whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.3 }}
                     >
                       {stat.value}
                     </motion.div>
                     
-                    <p className="text-sm md:text-base" style={{ color: 'var(--text-sub)' }}>
+                    <p className="text-sm md:text-base transition-colors duration-300" style={{ color: 'var(--text-sub)' }}>
                       {stat.label}
                     </p>
                   </div>
+
+                  {/* Border glow on hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      border: `2px solid ${stat.color}`,
+                      boxShadow: `0 0 20px ${stat.color}40`,
+                      pointerEvents: 'none'
+                    }}
+                  />
                 </motion.div>
               );
             })}
@@ -210,26 +225,27 @@ const About = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15 }}
                   onClick={() => setExpandedPrinciple(isExpanded ? null : index)}
-                  className="relative p-6 md:p-8 cursor-pointer group overflow-hidden rounded-xl transition-all duration-300"
+                  whileHover={{ y: -8 }}
+                  className="group relative p-6 md:p-8 cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover-lift"
                   style={{
                     background: 'var(--bg-surface)',
                     border: isExpanded ? '2px solid var(--accent)' : '1px solid var(--border-subtle)',
-                    minHeight: isExpanded ? '300px' : '280px'
+                    minHeight: isExpanded ? '320px' : '280px'
                   }}
                 >
-                  {/* Animated background gradient */}
+                  {/* Animated gradient background on hover */}
                   <motion.div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-5 transition-opacity duration-300"
-                    style={{ background: 'linear-gradient(135deg, var(--accent), var(--turf-green))' }}
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+                    style={{ 
+                      background: 'linear-gradient(135deg, var(--accent)15, var(--turf-green)05)',
+                      pointerEvents: 'none'
+                    }}
                   />
                   
-                  {/* Animated border glow on hover */}
+                  {/* Glow effect on hover */}
                   <motion.div
-                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20"
-                    style={{
-                      background: 'radial-gradient(circle at center, var(--accent), transparent)',
-                      filter: 'blur(20px)'
-                    }}
+                    className="absolute -inset-1 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300 rounded-xl"
+                    style={{ background: 'var(--accent)' }}
                     animate={{ opacity: isExpanded ? 0.3 : 0 }}
                   />
 
@@ -240,10 +256,11 @@ const About = () => {
                           rotate: isExpanded ? 360 : 0,
                           scale: isExpanded ? 1.2 : 1
                         }}
+                        whileHover={{ scale: 1.15 }}
                         transition={{ duration: 0.4 }}
                       >
                         <IconComponent 
-                          className="w-10 h-10 md:w-12 md:h-12" 
+                          className="w-10 h-10 md:w-12 md:h-12 transition-colors duration-300" 
                           style={{ color: 'var(--accent)' }} 
                           strokeWidth={1.5}
                         />
@@ -254,28 +271,26 @@ const About = () => {
                         transition={{ duration: 0.3 }}
                       >
                         <ChevronRight 
-                          className="w-5 h-5 md:w-6 md:h-6" 
+                          className="w-5 h-5 md:w-6 md:h-6 transition-colors duration-300" 
                           style={{ color: 'var(--accent)' }}
                         />
                       </motion.div>
                     </div>
 
-                    <h3 className="text-lg md:text-xl font-bold mb-3" style={{ color: 'var(--text-main)' }}>
+                    <h3 className="text-lg md:text-xl font-bold mb-3 transition-colors duration-300" style={{ color: 'var(--text-main)' }}>
                       {principle.title}
                     </h3>
 
                     <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ 
-                        opacity: isExpanded ? 1 : 0.7,
-                        height: isExpanded ? 'auto' : 'auto'
-                      }}
+                      initial={{ opacity: 0.7 }}
+                      animate={{ opacity: isExpanded ? 1 : 0.7 }}
                       transition={{ duration: 0.3 }}
                     >
                       <p style={{ 
                         color: 'var(--text-sub)', 
                         lineHeight: '1.7',
-                        fontSize: isExpanded ? '0.95rem' : '0.9rem'
+                        fontSize: isExpanded ? '0.95rem' : '0.9rem',
+                        transition: 'all 0.3s ease'
                       }}>
                         {principle.description}
                       </p>
@@ -289,12 +304,23 @@ const About = () => {
                         className="mt-4 pt-4 border-t"
                         style={{ borderColor: 'var(--border-subtle)' }}
                       >
-                        <p className="text-xs md:text-sm font-semibold" style={{ color: 'var(--accent)' }}>
+                        <p className="text-xs md:text-sm font-semibold transition-colors duration-300" style={{ color: 'var(--accent)' }}>
                           ✓ Click to collapse
                         </p>
                       </motion.div>
                     )}
                   </div>
+
+                  {/* Border glow on hover */}
+                  <motion.div
+                    className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      border: '2px solid var(--accent)',
+                      boxShadow: '0 0 20px var(--accent)40',
+                      pointerEvents: 'none'
+                    }}
+                    animate={{ opacity: isExpanded ? 0.5 : 0 }}
+                  />
                 </motion.div>
               );
             })}
