@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PageWrapper from "@/components/ui/PageWrapper";
+import PageMeta from "@/components/PageMeta";
 import {
   Upload,
   Users,
@@ -200,6 +201,10 @@ export default function Home() {
 
   return (
     <PageWrapper>
+      <PageMeta
+        title="Sports Moments & Debate"
+        description="Share game-changing sports moments, join live discussions, and connect with fans. Upload highlights and debate the play."
+      />
       <div className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
 
         {/* HERO - PRODUCT NARRATIVE FIRST */}

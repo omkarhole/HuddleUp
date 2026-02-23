@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from "@/api";
+import PageMeta from '@/components/PageMeta';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex" style={{ background: "#080a14" }}>
+      <PageMeta title="Sign In" description="Sign in to HuddleUp to share sports moments, join discussions, and connect with fans." />
 
       {/* ── Left branding panel ── */}
       <div

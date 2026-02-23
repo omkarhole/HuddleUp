@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import PageWrapper from "@/components/ui/PageWrapper";
+import PageMeta from "@/components/PageMeta";
 import { UploadCloud, X, CheckCircle, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { API } from "../api";
@@ -225,6 +226,7 @@ const Upload = () => {
 
   return (
     <PageWrapper>
+      <PageMeta title="Upload video" description="Upload a sports video to HuddleUp. Share highlights and connect with fans." />
       <div className="min-h-screen py-16 px-6"
         style={{ background: 'var(--bg-primary)' }}>
 
