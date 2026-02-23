@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { socket } from "../lib/socket";
+import PageMeta from "@/components/PageMeta";
 
 const mockMatch = {
   id: 1,
@@ -113,6 +114,7 @@ export default function LiveMatchRooms() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-6 text-white">
+      <PageMeta title="Live match" description="Watch live match rooms and chat with fans on HuddleUp." />
       <div className="max-w-6xl mx-auto rounded-3xl bg-white/5 backdrop-blur-lg border border-white/10 shadow-2xl p-6 flex flex-col md:flex-row gap-6">
 
         {/* Left Section */}

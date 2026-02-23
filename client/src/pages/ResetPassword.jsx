@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { API } from '@/api';
+import PageMeta from '@/components/PageMeta';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -52,6 +53,7 @@ export default function ResetPassword() {
   if (success) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <PageMeta title="Password reset" description="Your password has been reset. Sign in to HuddleUp with your new password." />
         <div className="w-full max-w-md">
           <Card className="shadow-xl border-0">
             <CardHeader className="space-y-1">
@@ -80,6 +82,7 @@ export default function ResetPassword() {
   if (!token) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <PageMeta title="Invalid reset link" description="This password reset link is invalid or expired. Request a new link from HuddleUp." />
         <div className="w-full max-w-md">
           <Card className="shadow-xl border-0">
             <CardHeader>
@@ -104,6 +107,7 @@ export default function ResetPassword() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <PageMeta title="Reset password" description="Set a new password for your HuddleUp account." />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-blue-600 mb-2">Set new password</h1>

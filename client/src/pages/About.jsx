@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import PageWrapper from "@/components/ui/PageWrapper";
+import PageMeta from "@/components/PageMeta";
 import { Users, Zap, Shield, Globe, TrendingUp, Heart } from "lucide-react";
 
 const About = () => {
+  const [hoveredIdx, setHoveredIdx] = useState(null);
   const stats = [
     { value: "10K+", label: "moments shared daily", color: "var(--accent)", icon: TrendingUp },
     { value: "25+", label: "sports from cricket to curling", color: "var(--turf-green)", icon: Globe },
@@ -17,12 +19,18 @@ const About = () => {
     {
       icon: Heart,
       title: "Community First, Always",
-      description: "No algorithm deciding what you see. No ads interrupting your flow. Just pure, unfiltered sports passion from people who actually care."
+      desc: "No algorithm deciding what you see. No ads interrupting your flow. Just pure, unfiltered sports passion from people who actually care.",
+      color: "#22c55e",       // emerald
+      colorLight: "rgba(34, 197, 94, 0.15)",
+      colorGlow: "rgba(34, 197, 94, 0.35)",
     },
     {
       icon: Zap,
       title: "Built for Speed",
-      description: "Upload highlights in seconds. Stream without buffering. React in real-time. Because when the game is on, every second counts."
+      desc: "Upload highlights in seconds. Stream without buffering. React in real-time. Because when the game is on, every second counts.",
+      color: "#00E5FF",       // cyan accent
+      colorLight: "rgba(0, 229, 255, 0.15)",
+      colorGlow: "rgba(0, 229, 255, 0.35)",
     },
     {
       icon: Shield,

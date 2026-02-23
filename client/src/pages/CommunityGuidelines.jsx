@@ -1,5 +1,6 @@
 import React from "react";
 import PageWrapper from "@/components/ui/PageWrapper";
+import PageMeta from "@/components/PageMeta";
 import { motion } from "framer-motion";
 import { ShieldCheck, MessageCircle, AlertTriangle, FileText, Lock, Flag, UserCheck, HeartHandshake } from "lucide-react";
 
@@ -56,6 +57,7 @@ const guidelines = [
 
 const CommunityGuidelines = () => (
   <PageWrapper>
+    <PageMeta title="Community Guidelines" description="HuddleUp community guidelines. Respect, sportsmanship, and safe space for all." />
     <div className="min-h-screen px-6 md:px-12 py-20 bg-gradient-to-br from-zinc-950 via-zinc-900 to-black">
       
       <div className="max-w-5xl mx-auto">

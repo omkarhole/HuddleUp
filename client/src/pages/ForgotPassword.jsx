@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API } from '@/api';
+import PageMeta from '@/components/PageMeta';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -36,6 +37,7 @@ export default function ForgotPassword() {
   if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+        <PageMeta title="Check your email" description="If an account exists, you will receive a password reset link from HuddleUp." />
         <div className="w-full max-w-md">
           <Card className="shadow-xl border-0">
             <CardHeader className="space-y-1">
@@ -64,6 +66,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <PageMeta title="Forgot password" description="Enter your email to receive a password reset link for your HuddleUp account." />
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-blue-600 mb-2">Reset password</h1>
