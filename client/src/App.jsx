@@ -76,7 +76,7 @@ function AppContent() {
             <Route path="/contributors" element={<Contributor />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/community-guidelines" element={<CommunityGuidelines />} />
-            <Route path="/Feedback" element={<Feedback />} />
+            <Route path="/feedback" element={<Feedback />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/live-match" element={<LiveMatchRooms />} />
           </Routes>
