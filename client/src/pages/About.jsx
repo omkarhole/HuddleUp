@@ -41,6 +41,7 @@ const About = () => {
 
   return (
     <PageWrapper>
+      <PageMeta title="About" description="HuddleUp is where sports fans share moments, debate the play, and connect. Community-first, built for speed." />
       <div className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
 
         {/* Hero Section */}
@@ -84,66 +85,6 @@ const About = () => {
               className="space-y-8"
             >
               <p className="text-lg md:text-xl" style={{
-      <PageMeta title="About" description="HuddleUp is where sports fans share moments, debate the play, and connect. Community-first, built for speed." />
-    <div className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
-      
-      {/* Hero Section */}
-      <section className="px-4 md:px-12 pt-16 md:pt-20 pb-12 md:pb-16">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-              We built{' '}
-              <span style={{
-                background: 'linear-gradient(135deg, #06b6d4, #3b82f6)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}>
-                HuddleUp
-              </span>
-              <br />
-              for the fans
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl max-w-3xl" style={{ 
-              color: 'var(--text-sub)', 
-              lineHeight: '1.6' 
-            }}>
-              Because fans were yelling into the void after moments that deserved a crowd.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Story Section */}
-      <section className="px-4 md:px-12 py-12 md:py-16">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="space-y-6 md:space-y-8"
-          >
-            <p className="text-base sm:text-lg md:text-xl" style={{ 
-              color: 'var(--text-main)', 
-              lineHeight: '1.8' 
-            }}>
-              Every platform promised community. Most delivered isolation.
-            </p>
-            
-            <p className="text-base sm:text-lg md:text-xl" style={{ 
-              color: 'var(--text-sub)', 
-              lineHeight: '1.8' 
-            }}>
-              You'd upload the greatest play you've ever seen, and it would vanish in 60 seconds. 
-              You'd start a debate about the GOAT, and the algorithm would bury it for engagement-bait.
-            </p>
-
-            <div className="py-8 md:py-12">
-              <p className="text-2xl sm:text-3xl md:text-4xl font-bold" style={{ 
                 color: 'var(--text-main)',
                 lineHeight: '1.8'
               }}>
@@ -304,7 +245,7 @@ const About = () => {
                           {principle.title}
                         </h3>
                         <p style={{ color: 'var(--text-sub)', lineHeight: '1.7' }}>
-                          {principle.description}
+                          {principle.desc}
                         </p>
                       </div>
                     </div>
