@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaInstagram, FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 export default function Footer() {
@@ -41,13 +42,13 @@ export default function Footer() {
                 { href: "/about", label: "About" }
               ].map((link) => (
                 <li key={link.label} className="group">
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-zinc-400 hover:text-emerald-400 inline-flex items-center gap-2 transition-all duration-200"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -67,13 +68,13 @@ export default function Footer() {
               { href: "/community-guidelines", label: "Community Guidelines", id: "community-guidelines" }
               ].map((link) => (
                 <li key={link.id} className="group">
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-zinc-400 hover:text-emerald-400 inline-flex items-center gap-2 transition-all duration-200"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
